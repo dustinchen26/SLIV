@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>5G SLIV Calculator</title>
+    <style>
+        p, h1, h2, div {
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+    </style>	
+	
+</head>
+<body>
+    <h1>5G SLIV Calculator</h1>
+    <p>Author: Dustin Chen, Email: <a href="mailto:Dustin_Chen@compal.com">Dustin_Chen@compal.com</a></p>
+    <p>Spec 38.214 chape 5.1.2.1  Resource allocation in time domain </p>
+    <p>SLIV is the Start and Length Indicator for the time domain allocation for PDSCH. </p>
+    <div>
+        <p>If <code>(L - 1) &lt;= 7</code> then</p>
+        <p>&nbsp &nbsp &nbsp SLIV = <code>14 x (L - 1) + S</code></p>
+        <p>else</p>
+        <p>&nbsp &nbsp &nbsp SLIV = <code>14 x (14 - L + 1) + (14 - 1 - S)</code></p>
+        <p>, where <code>0 &lt; L &lt;= 14 - S</code></p>
+        <p>S = Start Symbol Index</p>
+        <p>L = Number of Consecutive Symbols</p>
+    </div>
+	
+    <h2>Program 1: Input S,L, and calculate SLIV</h2>
+    <form id="calculateSLIVForm">
+        <label for="inputS">S:</label>
+        <input type="number" id="inputS" name="inputS" min="0" max="13" required>
+        <br>
+        <label for="inputL">L:</label>
+        <input type="number" id="inputL" name="inputL" min="1" max="14" required>
+        <br>
+        <button type="button" onclick="calculateSLIV()">Calculate SLIV</button>
+    </form>
+    <p id="calculatedSLIV"></p>
+
+    <h2>Program 2: Input SLIV, and calculate S,L</h2>
+    <form id="calculateSAndLForm">
+        <label for="inputSLIV">SLIV:</label>
+        <input type="number" id="inputSLIV" name="inputSLIV" min="0" required>
+        <br>
+        <button type="button" onclick="calculateSAndL()">Calculate S and L</button>
+    </form>
+    <p id="calculatedSAndL"></p>
+
+    <h2>Program 3: List all Possible Combinations</h2>
+    <button type="button" onclick="printAllCombinations()">Print All Combinations</button>
+    <pre id="allCombinations"></pre>
+
+    <script>
+        function calculateSLIV() {
+            const S = parseInt(document.getElementById('inputS').value);
+            const L = parseInt(document.getElementById('inputL').value);
+
+            let SLIV;
+            if ((L - 1) <= 7) {
+                SLIV = 14 * (L - 1) + S;
+            } else {
+                SLIV = 14 * (14 - L + 1) + (14 - 1 - S);
+            }
+
+            document.getElementById('calculatedSLIV').textContent = `Calculated SLIV: ${SLIV}`;
+        }
+
+        function calculateSAndL() {
+            const SLIV = parseInt(document.getElementById('inputSLIV').value);
+
+            let S = null;
+            let L = null;
+            for (let SVal = 0; SVal <= 13; SVal++) {
+                for (let LVal = 1; LVal <= 14 - SVal; LVal++) {
+                    if ((LVal - 1) <= 7 && (SLIV === 14 * (LVal - 1) + SVal)) {
+                        S = SVal;
+                        L = LVal;
+                        break;
+                    } else if ((LVal - 1) > 7 && (SLIV === 14 * (14 - LVal + 1) + (14 - 1 - SVal))) {
+                        S = SVal;
+                        L = LVal;
+                        break;
+                    }
+                }
+                if (S !== null && L !== null) {
+                    break;
+                }
+            }
+
+            if (S !== null && L !== null) {
+                document.getElementById('calculatedSAndL').textContent = `Calculated S: ${S}, Calculated L: ${L}`;
+            } else {
+                document.getElementById('calculatedSAndL').textContent = 'No valid S and L found for the given SLIV.';
+            }
+        }
+
+        function printAllCombinations() {
+            const allCombinations = [];
+            for (let S = 0; S <= 13; S++) {
+                for (let L = 1; L <= 14 - S; L++) {
+                    const SLIV = calculateSLIVValue(S, L);
+                    allCombinations.push(`S = ${S}, L = ${L}, Calculated SLIV = ${SLIV}`);
+                }
+            }
+            document.getElementById('allCombinations').textContent = allCombinations.join('\n');
+        }
+
+        function calculateSLIVValue(S, L) {
+            if ((L - 1) <= 7) {
+                return 14 * (L - 1) + S;
+            } else {
+                return 14 * (14 - L + 1) + (14 - 1 - S);
+            }
+        }
+    </script>
+</body>
+</html>
