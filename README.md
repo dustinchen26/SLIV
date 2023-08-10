@@ -1,4 +1,4 @@
-# ssb_calculate
+# SLIV calculate
 online calculate: https://dustinchen26.github.io/SLIV
 
 ## Purpose
@@ -14,17 +14,19 @@ else
 ```				   
 
 ## Program 1: Calculate SLIV
+```
 S: 
 L: 
 Calculate SLIV
-
+```
 ## Program 2: Calculate S and L
+```
 SLIV: 
 Calculate S and L
-
-## Program 3: List all Possible Combinations
-Print All Combinations
 ```
+## Program 3: List all Possible Combinations
+```
+Print All Combinations
 ex:
 S = 0, L = 1, Calculated SLIV = 0
 S = 0, L = 2, Calculated SLIV = 14
