@@ -16,6 +16,10 @@
     <p>Author: Dustin Chen, Email: <a href="mailto:Dustin_Chen@compal.com">Dustin_Chen@compal.com</a></p>
     <p>Spec 38.214 chape 5.1.2.1  Resource allocation in time domain </p>
     <p>SLIV is the Start and Length Indicator for the time domain allocation for PDSCH. </p>
+	<br style="line-height: 0;">&nbsp;&nbsp;&nbsp;&nbsp;
+	<img src="https://raw.githubusercontent.com/dustinchen26/SLIV/master/formula.png" alt="GitHub Image" width="400">
+	
+<!--	
     <div>
         <p>If <code>(L - 1) &lt;= 7</code> then</p>
         <p>&nbsp &nbsp &nbsp SLIV = <code>14 x (L - 1) + S</code></p>
@@ -25,8 +29,8 @@
         <p>S = Start Symbol</p>
         <p>L = Number of Consecutive Symbols</p>
     </div>
-	
-    <h2>Program 1: Input S,L, and calculate SLIV</h2>
+-->
+    <h2>Program 1: Input S,L to calculate SLIV</h2>
     <form id="calculateSLIVForm">
         <label for="inputS">S:</label>
         <input type="number" id="inputS" name="inputS" min="0" max="13" required>
@@ -34,21 +38,21 @@
         <label for="inputL">L:</label>
         <input type="number" id="inputL" name="inputL" min="1" max="14" required>
         <br>
-        <button type="button" onclick="calculateSLIV()">Calculate SLIV</button>
+        <button type="button" onclick="calculateSLIV()">Calculate</button>
     </form>
     <p id="calculatedSLIV"></p>
 
-    <h2>Program 2: Input SLIV, and calculate S,L</h2>
+    <h2>Program 2: Input SLIV, to calculate S,L</h2>
     <form id="calculateSAndLForm">
         <label for="inputSLIV">SLIV:</label>
         <input type="number" id="inputSLIV" name="inputSLIV" min="0" required>
         <br>
-        <button type="button" onclick="calculateSAndL()">Calculate S and L</button>
+        <button type="button" onclick="calculateSAndL()">Calculate</button>
     </form>
     <p id="calculatedSAndL"></p>
 
     <h2>Program 3: List all Possible Combinations</h2>
-    <button type="button" onclick="printAllCombinations()">Print All Combinations</button>
+    <button type="button" onclick="printAllCombinations()">List</button>
     <pre id="allCombinations"></pre>
 
     <script>
