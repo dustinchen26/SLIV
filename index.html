@@ -8,6 +8,11 @@
             padding: 0;
             line-height: 1.5;
         }
+
+        input {
+            width: 50px; /* 调整输入框的宽度 */
+        }		
+		
     </style>	
 	
 </head>
@@ -67,7 +72,7 @@
                 SLIV = 14 * (14 - L + 1) + (14 - 1 - S);
             }
 
-            document.getElementById('calculatedSLIV').textContent = `Calculated SLIV: ${SLIV}`;
+            document.getElementById('calculatedSLIV').textContent = `SLIV= ${SLIV}`;
         }
 
         function calculateSAndL() {
@@ -93,7 +98,7 @@
             }
 
             if (S !== null && L !== null) {
-                document.getElementById('calculatedSAndL').textContent = `Calculated S: ${S}, Calculated L: ${L}`;
+                document.getElementById('calculatedSAndL').textContent = `S= ${S}, L= ${L}`;
             } else {
                 document.getElementById('calculatedSAndL').textContent = 'No valid S and L found for the given SLIV.';
             }
