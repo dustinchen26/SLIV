@@ -10,12 +10,12 @@
     <title>NR time resource SLIV Calculator</title>
     <style>
         body {
-			font-family: 'Arial', sans-serif; /* 使用Arial字體或類似字體 */		
+            font-family: 'Arial', sans-serif; /* 使用Arial字體或類似字體 */        
             font-size: 14px; /* 調整字體大小 */
             font-weight: normal;
             font-style: normal;
-        }	
-		
+        }    
+        
         p, h1, h2, div {
             margin: 0;
             padding: 0;
@@ -23,105 +23,89 @@
         }
 
         input {
-            width: 50px; /* 调整输入框的宽度 */
-        }	
-		
-   		 /* 縮小項目符號與標題之間的行距 */
-   		 ul li h3 {
-    		  margin-top: 0;
-  		      margin-bottom: 0;
- 		 }	
-		 
+            width: 50px; /* 調整輸入框的寬度 */
+        }    
+        
+         /* 縮小項目符號與標題之間的行距 */
+         ul li h3 {
+              margin-top: 0;
+              margin-bottom: 0;
+         }    
+         
         pre {
             font-size: 14px; /* 調整字體大小 */
             line-height: 1; /* 調整行距為0 */
-        }		
-		
+        }        
+        
         /* 將特定文本設置為藍色 */
         .blue-text {
             color: blue;
-        }		 
-		 
-    </style>	
-	
+        }         
+         
+    </style>    
+    
 </head>
 <body>
     <h1>NR time resource SLIV Calculator</h1>
-<!--	
-    <p>Author: Dustin Chen, Email: <a href="mailto:Dustin_Chen@compal.com">Dustin_Chen@compal.com</a></p>
--->	
-	<p style="margin: 0;">Author: Dustin_Chen, email: <a href="mailto:Dustin_Chen@compal.com" style="line-height: 1;">Dustin_Chen@compal.com</a> or <a href="mailto:chuhpsdustin@gmail.com" style="line-height: 1;">chuhpsdustin@gmail.com</a></p>
-
+    <p style="margin: 0;">Author: Dustin_Chen, email: <a href="mailto:Dustin_Chen@compal.com" style="line-height: 1;">Dustin_Chen@compal.com</a> or <a href="mailto:chuhpsdustin@gmail.com" style="line-height: 1;">chuhpsdustin@gmail.com</a></p>
 
 <ul>
     <li>
-		<h3><strong>3GPP Spec</strong></h3>
-		<ul>
-			<li>
-				38.214 chape 5.1.2.1  Resource allocation in time domain
-				<br>SLIV is the Start and Length Indicator for the time domain allocation for PDSCH.<br>
-				<img src="https://raw.githubusercontent.com/dustinchen26/SLIV/master/formula.png" alt="GitHub Image" width="250" >
-     				<!--	
-	     			<div>
-   				          <p>If <code>(L - 1) &lt;= 7</code> then</p>
-    				         <p>&nbsp &nbsp &nbsp SLIV = <code>14 x (L - 1) + S</code></p>
-    				         <p>else</p>
-    				         <p>&nbsp &nbsp &nbsp SLIV = <code>14 x (14 - L + 1) + (14 - 1 - S)</code></p>
-    				         <p>, where <code>0 &lt; L &lt;= 14 - S</code></p>
-   				          <p>S = Start Symbol</p>
-     			     	  <p>L = Number of Consecutive Symbols</p>
-   				    </div>
-				     -->
-
-			</li>
-		</ul>
+        <h3><strong>3GPP Spec</strong></h3>
+        <ul>
+            <li>
+                38.214 chapter 5.1.2.1 Resource allocation in time domain
+                <br>SLIV is the Start and Length Indicator for the time domain allocation for PDSCH.<br>
+                <img src="https://raw.githubusercontent.com/dustinchen26/SLIV/master/formula.png" alt="GitHub Image" width="250" >
+            </li>
+        </ul>
     </li><br>
-	
+    
     <li>
-		<h3><strong>(1) Input S,L to calculate SLIV</strong></h3>
-		<ul>
-			<li>
-				<label for="inputS">S:</label>
+        <h3><strong>(1) Input S,L to calculate SLIV</strong></h3>
+        <ul>
+            <li>
+                <label for="inputS">S:</label>
                 <input type="number" id="inputS" name="inputS" min="0" max="13" required value="0">
-			</li>
-			<li>
-				<label for="inputL">L:</label>
-				<input type="number" id="inputL" name="inputL" min="1" max="14" required value="12">
-			</li>
-			<button type="button" onclick="calculateSLIV()">Calculate</button>
-			<span class="blue-text"><p id="calculatedSLIV"></p></span>
-		</ul>
+            </li>
+            <li>
+                <label for="inputL">L:</label>
+                <input type="number" id="inputL" name="inputL" min="1" max="14" required value="12">
+            </li>
+            <button type="button" onclick="calculateSLIV()">Calculate</button>
+            <span class="blue-text"><p id="calculatedSLIV"></p></span>
+        </ul>
     </li><br>
-	
+    
     <li>
-		<h3><strong>(2) Input SLIV, to calculate S,L</strong></h3>
-		<ul>
-			<li>
-				<label for="inputSLIV">SLIV:</label>
-				<input type="number" id="inputSLIV" name="inputSLIV" min="0" required value="55">
-			</li>
-			<button type="button" onclick="calculateSAndL()">Calculate</button>
-			<span class="blue-text"><p id="calculatedSAndL"></p></span>
-		</ul>
+        <h3><strong>(2) Input SLIV, to calculate S,L</strong></h3>
+        <ul>
+            <li>
+                <label for="inputSLIV">SLIV:</label>
+                <input type="number" id="inputSLIV" name="inputSLIV" min="0" required value="55">
+            </li>
+            <button type="button" onclick="calculateSAndL()">Calculate</button>
+            <span class="blue-text"><p id="calculatedSAndL"></p></span>
+        </ul>
     </li><br>
-	
+    
     <li>
-		<h3><strong>List all Possible Combinations</strong></h3>
-		<button type="button" onclick="printAllCombinations()">List</button>
-		<span class="blue-text"><pre id="allCombinations"></pre></span>
+        <h3><strong>List all Possible Combinations</strong></h3>
+        <button type="button" onclick="printAllCombinations()">List</button>
+        <span class="blue-text"><pre id="allCombinations"></pre></span>
     </li>
-	<br>	
-	
+    <br>    
+    
     <script>
         function calculateSLIV() {
             const S = parseInt(document.getElementById('inputS').value);
             const L = parseInt(document.getElementById('inputL').value);
 
             let SLIV;
-            if ((L - 1) <= 7) {
+            if (L <= 8) {
                 SLIV = 14 * (L - 1) + S;
             } else {
-                SLIV = 14 * (14 - L + 1) + (14 - 1 - S);
+                SLIV = 14 * (14 - L) + (13 - S);
             }
 
             document.getElementById('calculatedSLIV').textContent = `SLIV= ${SLIV}`;
@@ -130,30 +114,16 @@
         function calculateSAndL() {
             const SLIV = parseInt(document.getElementById('inputSLIV').value);
 
-            let S = null;
-            let L = null;
-            for (let SVal = 0; SVal <= 13; SVal++) {
-                for (let LVal = 1; LVal <= 14 - SVal; LVal++) {
-                    if ((LVal - 1) <= 7 && (SLIV === 14 * (LVal - 1) + SVal)) {
-                        S = SVal;
-                        L = LVal;
-                        break;
-                    } else if ((LVal - 1) > 7 && (SLIV === 14 * (14 - LVal + 1) + (14 - 1 - SVal))) {
-                        S = SVal;
-                        L = LVal;
-                        break;
-                    }
-                }
-                if (S !== null && L !== null) {
-                    break;
-                }
+            let S, L;
+            if (SLIV < 112) { // L <= 8
+                L = Math.floor(SLIV / 14) + 1;
+                S = SLIV % 14;
+            } else { // L > 8
+                L = 14 - Math.floor((SLIV - 112) / 14);
+                S = 13 - ((SLIV - 112) % 14);
             }
 
-            if (S !== null && L !== null) {
-                document.getElementById('calculatedSAndL').textContent = `S= ${S}, L= ${L}`;
-            } else {
-                document.getElementById('calculatedSAndL').textContent = 'No valid S and L found for the given SLIV.';
-            }
+            document.getElementById('calculatedSAndL').textContent = `S= ${S}, L= ${L}`;
         }
 
         function printAllCombinations() {
@@ -168,10 +138,10 @@
         }
 
         function calculateSLIVValue(S, L) {
-            if ((L - 1) <= 7) {
+            if (L <= 8) {
                 return 14 * (L - 1) + S;
             } else {
-                return 14 * (14 - L + 1) + (14 - 1 - S);
+                return 14 * (14 - L) + (13 - S);
             }
         }
     </script>
